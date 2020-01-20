@@ -1,0 +1,245 @@
+@charset "UTF-8";
+/* CSS DOCUMENt */
+
+html {
+   background-color: rgb(57, 57, 57);
+}
+
+.hidden {
+   display: none;
+}
+
+#home {
+   position: fixed;
+   height: 100vh;
+   width: 100%;
+   display: none;
+}
+
+#game {
+   position: fixed;
+   height: 97vh;
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   align-items: stretch;
+   justify-content: center;
+}
+
+#game div {
+   text-align: center;
+   border-radius: 12px;
+}
+
+#game p {
+   font-size: 25px;
+   color: white;
+   font-weight: 400;
+   letter-spacing: 5px;
+   padding: 10px;
+   text-transform: uppercase;
+}
+
+.game__nav {
+   height: 6vh;
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: flex-end;
+}
+
+.game__nav-left {
+   justify-content: flex-end;
+}
+
+.game__nav-right {
+   justify-content: flex-start;
+}
+
+.nav__buttons {
+   margin: 0px 10px;
+   height: 3.5vh;
+}
+
+/* Game Side */
+.game__side {
+   height: 97vh;
+   width: 20%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: stretch;
+}
+
+.music__tracks {
+   height: 50vh;
+   background-color: rgb(42, 42, 42);
+   margin: 0px 10px 10px 10px;
+   box-shadow: 8px 8px 20px rgba(136, 25, 149, 0.2) inset;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   flex-wrap: wrap;
+   border: 3px solid rgba(136, 25, 149, 0.3);
+}
+
+
+/* Game Center */
+.game__center {
+   height: 97vh;
+   width: 60%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: stretch;
+
+}
+
+.music__image {
+   height: 55vh;
+   background: rgb(80, 67, 93);
+   margin: 0 10px;
+   box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.4) inset;
+}
+
+
+.music__control {
+   height: 40vh;
+   margin: 20px;
+   display: flex;
+   flex-direction: row;
+   align-items: stretch;
+   justify-content: space-around;
+}
+
+.music__drop {
+   width: 20%;
+   margin: 5px;
+   display: flex;
+   flex-direction: column;
+   align-items: stretch;
+   justify-content: space-around;
+
+}
+
+
+.drop__box {
+   padding: 10px;
+   margin: 5px;
+   background: rgb(84, 84, 84);
+   background-image: url('../images/drop.png');
+   background-size: 60%;
+   background-repeat: no-repeat;
+   background-position: center;
+   box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.2);
+   height: 50%;
+   transition: background-color .2s;
+}
+
+.dropped {
+   background-color: rgb(80, 80, 80);
+   background-image: url('../images/song1.svg');
+   background-size: 60%;
+   background-repeat: no-repeat;
+   background-position: center;
+}
+
+
+.drop__controls {
+   padding: 10px;
+   margin: 5px;
+   height: 50%;
+   background: rgb(60, 60, 60);
+   box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.2);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-around;
+   overflow: visible;
+}
+
+.drop__image {
+   margin-top: 7%;
+   width: 60%;
+   height: auto;
+   opacity: .3;
+}
+
+
+/*Volume Controls*/
+.volume__label {
+   color: rgb(120, 95, 152);
+   font-weight: 300;
+   font-size: 15px;
+   padding: 4px;
+}
+
+
+input[type='range'] {
+      overflow: hidden;
+      width: 80%;
+      -webkit-appearance: none;
+      height: 8px;
+      transition: opacity .2s;
+      background-color: #a8a8a8;
+      border-radius: 5px;
+      box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.2) inset;
+      outline: none;
+    }
+
+    input[type='range']::-webkit-slider-runnable-track {
+      height: 10px;
+      -webkit-appearance: none;
+      margin-top: -1px;
+    }
+
+    input[type=range]::-moz-range-track {
+      height: 10px;
+      -webkit-appearance: none;
+      margin-top: -1px;
+    }
+
+    input[type='range']::-webkit-slider-thumb {
+      width: 10px;
+      -webkit-appearance: none;
+      height: 10px;
+      cursor: ew-resize;
+      background: #d7d7d7;
+      box-shadow: -80px 0 0 80px rgb(120, 95, 152);
+    }
+
+    input[type=range]::-moz-range-thumb {
+      width: 10px;
+      appearance: none;
+      height: 10px;
+      cursor: ew-resize;
+      background: #d7d7d7;
+      box-shadow: -80px 0 0 80px rgb(120, 95, 152);
+   }
+
+.sound__controls {
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-around;
+
+}
+
+.mute__buttons {
+   width: 23%;
+   opacity: .5;
+   background-color: rgb(85, 85, 85);
+   border-radius: 5px;
+   box-shadow: 8px 8px 10px rgba(100, 100, 100, 0.4) inset;
+}
+
+.songs {
+   width: 100px;
+   height: 100px;
+   margin: 10px;
+   border-radius: 5px;
+   box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.2);
+}

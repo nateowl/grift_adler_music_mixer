@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Music Mixer</title>
+   <link href="css/reset.css" rel="stylesheet" type="text/css" media="screen">
+   <link href="css/main.css" rel="stylesheet"  type="text/css" media="screen">
+</head>
+<body>
+
+<section id="home"><!--Home Section Start-->
+   <div class="home__nav">
+
+   </div>
+   <div class="home__slash">
+
+   </div>
+   <div class="home__start"></div>
+</section><!--Home Section End-->
+
+<section id="game">
+
+   <div class="game__side">
+      <section class="game__nav game__nav-right"><!--Nav Section Start-->
+         <a href="#" onclick="resync()">
+            <img class="nav__buttons" src="images/info.svg" alt="info">
+         </a>
+      </section><!--Nav Section End-->
+      <div class="music__tracks">
+         <img src="images/song1.svg" class="songs" ondragstart="drag(event, 'song1')" draggable="true"></img>
+         <img src="images/song2.svg" class="songs" ondragstart="drag(event, 'song2')" draggable="true"></img>
+         <img src="images/song3.svg" class="songs" ondragstart="drag(event, 'song3')" draggable="true"></img>
+         <img src="images/song4.svg" class="songs" ondragstart="drag(event, 'song4')" draggable="true"></img>
+      </div>
+      <div class="music__tracks">
+         <img src="images/song5.svg" class="songs" ondragstart="drag(event, 'song5')" draggable="true"></img>
+         <img src="images/song6.svg" class="songs" ondragstart="drag(event, 'song6')" draggable="true"></img>
+         <img src="images/song7.svg" class="songs" ondragstart="drag(event, 'song7')" draggable="true"></img>
+         <img src="images/song8.svg" class="songs" ondragstart="drag(event, 'song8')" draggable="true"></img>
+      </div>
+   </div>
+   <div class="game__center">
+      <div class="music__image"><p>Image</p>
+        </div>
+      <div class="music__control">
+         <div class="music__drop"><!--Music Drop Start 1-->
+            <div ondrop="drop(event, 'audio1', this)" ondragleave="dragLeave(this)" ondragover="allowDrop(event, this)" class="drop__box">
+               <audio id="audio1" loop preload="auto">
+              <source src="sounds/song1.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+            <div id="drop__controls" class="drop__controls">
+               <label class="volume__label">Volume</label>
+               <input type="range" min="1" max="100" value="100" class="slider" oninput="setVolume(this.value, 'audio1')" onchange="setVolume(this.value, 'audio1')">
+               <div class="sound__controls">
+                  <img src="images/mute.svg" alt="mute" class="mute__buttons" onclick="mute('audio1', this)">
+                  <img src="images/exit.svg" alt="exit" class="mute__buttons" onclick="cancel('audio1')">
+               </div>
+            </div>
+         </div><!--Music Drop End -->
+         <div class="music__drop"><!--Music Drop Start 2-->
+            <div ondrop="drop(event, 'audio2', this)" ondragleave="dragLeave(this)" ondragover="allowDrop(event, this)" class="drop__box">
+               <audio id="audio2" loop preload="auto">
+              <source src="sounds/song1.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+            <div id="drop__controls" class="drop__controls">
+               <label class="volume__label">Volume</label>
+               <input type="range" min="1" max="100" value="100" class="slider" oninput="setVolume(this.value, 'audio2')" onchange="setVolume(this.value, 'audio2')">
+               <div class="sound__controls">
+                  <img src="images/mute.svg" alt="mute" class="mute__buttons" onclick="mute('audio2', this)">
+                  <img src="images/exit.svg" alt="exit" class="mute__buttons" onclick="cancel('audio2')">
+               </div>
+            </div>
+         </div><!--Music Drop end -->
+         <div class="music__drop"><!--Music Drop Start 3-->
+            <div ondrop="drop(event, 'audio3', this)" ondragleave="dragLeave(this)" ondragover="allowDrop(event, this)" class="drop__box">
+               <audio id="audio3" loop preload="auto">
+              <source src="sounds/song1.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+            <div id="drop__controls" class="drop__controls">
+               <label class="volume__label">Volume</label>
+               <input type="range" min="1" max="100" value="100" class="slider" oninput="setVolume(this.value, 'audio3')" onchange="setVolume(this.value, 'audio3')">
+               <div class="sound__controls">
+                  <img src="images/mute.svg" alt="mute" class="mute__buttons" onclick="mute('audio3', this)">
+                  <img src="images/exit.svg" alt="exit" class="mute__buttons" onclick="cancel('audio3')">
+               </div>
+            </div>
+         </div><!--Music Drop end -->
+         <div class="music__drop"><!--Music Drop Start 4-->
+            <div ondrop="drop(event, 'audio4', this)" ondragleave="dragLeave(this)" ondragover="allowDrop(event, this)" class="drop__box">
+               <audio id="audio4" loop>
+              <source src="sounds/song1.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+            <div id="drop__controls" class="drop__controls">
+               <label class="volume__label">Volume</label>
+               <input type="range" min="1" max="100" value="100" class="slider" oninput="setVolume(this.value, 'audio4')" onchange="setVolume(this.value, 'audio4')">
+               <div class="sound__controls">
+                  <img src="images/mute.svg" alt="mute" class="mute__buttons" onclick="mute('audio4', this)">
+                  <img src="images/exit.svg" alt="exit" class="mute__buttons" onclick="cancel('audio4')">
+               </div>
+            </div>
+         </div><!--Music Drop end -->
+         <div class="music__drop"><!--Music Drop Start 5-->
+            <div ondrop="drop(event, 'audio5', this)" ondragleave="dragLeave(this)" ondragover="allowDrop(event, this)" class="drop__box">
+               <audio id="audio5" loop>
+              <source src="sounds/song1.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+            <div id="drop__controls" class="drop__controls">
+               <label for="volume-1" class="volume__label">Volume</label>
+               <input type="range" min="1" max="100" value="100" class="slider" oninput="setVolume(this.value, 'audio5')" onchange="setVolume(this.value, 'audio5')">
+               <div class="sound__controls">
+                  <img src="images/mute.svg" alt="mute" class="mute__buttons" onclick="mute('audio5', this)">
+                  <img src="images/exit.svg" alt="exit" class="mute__buttons" onclick="cancel('audio5')">
+               </div>
+            </div>
+         </div><!--Music Drop end -->
+      </div>
+   </div>
+   <div class="game__side">
+      <section class="game__nav game__nav-left"><!--Nav Section Start-->
+         <a href="#" onclick="resync()">
+            <img class="nav__buttons" src="images/sync.svg" alt="sync">
+         </a>
+         <a href="index.html">
+            <img class="nav__buttons" src="images/reset.svg" alt="reset">
+         </a>
+      </section><!--Nav Section End-->
+      <div class="music__tracks">
+         <img src="images/song9.svg" class="songs" ondragstart="drag(event, 'song9')" draggable="true"></img>
+         <img src="images/song10.svg" class="songs" ondragstart="drag(event, 'song10')" draggable="true"></img>
+         <img src="images/song11.svg" class="songs" ondragstart="drag(event, 'song11')" draggable="true"></img>
+         <img src="images/song12.svg" class="songs" ondragstart="drag(event, 'song12')" draggable="true"></img>
+      </div>
+      <div class="music__tracks">
+         <img src="images/song13.svg" class="songs" ondragstart="drag(event, 'song13')" draggable="true"></img>
+         <img src="images/song14.svg" class="songs" ondragstart="drag(event, 'song14')" draggable="true"></img>
+         <img src="images/song15.svg" class="songs" ondragstart="drag(event, 'song15')" draggable="true"></img>
+         <img src="images/song16.svg" class="songs" ondragstart="drag(event, 'song16')" draggable="true"></img>
+      </div>
+
+   </div>
+</section>
+
+<script src="js/main.js"></script>
+</body>
+</html>
