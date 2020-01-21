@@ -3,11 +3,30 @@
 
 html {
    background-color: rgb(57, 57, 57);
+   color: rgb(47, 47, 47);
 }
 
-.hidden {
-   display: none;
+h3 {
+   font-size: 24px;
+   font-weight: bold;
 }
+
+hr {
+   width: 40%;
+   border-color: rgb(45, 45, 45);
+}
+
+p {
+   margin: 10px;
+   line-height: 18px;
+   font-size: 15px;
+}
+
+.margin-top-huge {margin-top: 10vh;}
+.margin-top-large {margin-top: 5vh;}
+.margin-top-medium {margin-top: 2vh;}
+.bold {font-weight: bold;}
+.hidden {display: none;}
 
 #home {
    position: fixed;
@@ -39,6 +58,53 @@ html {
    padding: 10px;
    text-transform: uppercase;
 }
+
+#info {
+   position: fixed;
+   height: 100vh;
+   width: 100%;
+   background-color: rgba(0, 0, 0, .6)
+}
+
+
+/* INFO SECTION */
+
+.info__box {
+   position: relative;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 40%;
+   height: 70vh;
+   background-color: rgb(129, 129, 129);
+   border-radius: 10px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+}
+
+.info__box > p {
+   width: 60%;
+}
+
+.info__box a {
+   position: absolute;
+   top: 20px;
+   right: 20px;
+   font-size: 20px;
+   font-weight: bold;
+}
+
+
+
+
+
+
+
+
+/* GAME SECTION */
 
 .game__nav {
    height: 6vh;
@@ -73,7 +139,7 @@ html {
 }
 
 .music__tracks {
-   height: 50vh;
+   height: 100vh;
    background-color: rgb(42, 42, 42);
    margin: 0px 10px 10px 10px;
    box-shadow: 8px 8px 20px rgba(136, 25, 149, 0.2) inset;
@@ -83,6 +149,7 @@ html {
    justify-content: center;
    flex-wrap: wrap;
    border: 3px solid rgba(136, 25, 149, 0.3);
+   overflow: scroll;
 }
 
 
@@ -135,7 +202,7 @@ html {
    background-position: center;
    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.2);
    height: 50%;
-   transition: background-color .2s;
+   transition: all .2s;
 }
 
 .dropped {
@@ -145,6 +212,12 @@ html {
    background-repeat: no-repeat;
    background-position: center;
 }
+
+.droppable {
+   background-color: rgb(101, 101, 101);
+   background-image: none;
+}
+
 
 
 .drop__controls {
@@ -171,7 +244,7 @@ html {
 /*Volume Controls*/
 .volume__label {
    color: rgb(120, 95, 152);
-   font-weight: 300;
+   font-weight: bold;
    font-size: 15px;
    padding: 4px;
 }
@@ -225,6 +298,7 @@ input[type='range'] {
    flex-direction: row;
    align-items: center;
    justify-content: space-around;
+   z-index: 2;
 
 }
 
@@ -234,12 +308,57 @@ input[type='range'] {
    background-color: rgb(85, 85, 85);
    border-radius: 5px;
    box-shadow: 8px 8px 10px rgba(100, 100, 100, 0.4) inset;
+   transition: all .2s;
+}
+.mute__buttons:hover {
+   transform: scale(1.1);
+}
+
+.forceExit {
+   width: 23%;
+   opacity: .5;
+   border-radius: 5px;
+
+}
+
+.forceExit:hover {
+   background-color: rgb(107, 84, 84);
+}
+
+.exitOut {
+   background: rgb(8, 8, 8);
+   transition: all .3s;
+   background-image: linear-gradient(to bottom, 90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 100%);
+   background-size: 60%;
+   background-repeat: no-repeat;
+   background-position: center;
+   background-blend-mode: overlay;
+   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .songs {
-   width: 100px;
-   height: 100px;
+   width: 30%;
+   height: auto;
    margin: 10px;
    border-radius: 5px;
    box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.2);
+}
+
+.wait {
+   z-index: -1;
+   transform: translateY(40px);
+   background: rgb(34, 34, 34);
+   background-image: linear-gradient(to bottom, 90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 100%), url('../images/drop.png');
+   background-size: 60%;
+   background-repeat: no-repeat;
+   background-position: center;
+   background-blend-mode: overlay;
+   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.notActive {
+   transition: all .3s;
+   background: rgb(0, 0, 0,);
+   object-fit: cover;
+   opacity: 0.2;
 }
