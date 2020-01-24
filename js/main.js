@@ -10,7 +10,7 @@ const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioCtx = new AudioContext();
 
 
-// Resets the time of the audio (Possibly removing in future)
+// Resets the time of the audio ** AUTOMATICALLY LOOPING **
 function resync() {
    setTimeout(function(){
       for (x of activeAudio) {
@@ -31,6 +31,7 @@ function resync() {
 
 }
 
+
 //Creates Event listeners for the songs, with dragstart and sets Id & Src's
 const songs = document.querySelectorAll('.songs');
 songs.forEach((elem, x) => {
@@ -41,6 +42,7 @@ songs.forEach((elem, x) => {
          event.dataTransfer.setData("text", elem.id);
    });
 });
+
 
 // Default Classes Dropbox
 function clearClass() {
@@ -74,7 +76,6 @@ audioPlayer.forEach((elem, x) => {
 
       if (songsFaded[x]) {
          const songOld = document.getElementById(songsFaded[x]);
-         console.log(songsFaded[x])
          songOld.classList.remove('notActive');
          songOld.setAttribute('draggable', true);
          songsFaded[x] = null;
@@ -100,6 +101,11 @@ audioPlayer.forEach((elem, x) => {
 });
 
 
+/**
+ * Plays Song called from when song is dropped
+ * @param  {string} songId Song Id to signal what song to play
+ * @param  {string} dropId Drop Id of what Audio Player
+ */
 function plays(songId, dropId) {
    let audio;
    audio = document.getElementById(dropId);
@@ -152,19 +158,21 @@ const exit = document.querySelectorAll('.exit');
    forceExit.forEach((elem, x) => {
       elem.addEventListener('click', function(event) {
          clearClass();
+         // Stops the audio from playing
          let audioCancel = document.getElementById(`audio${x}`);
          audioCancel.pause();
          audioCancel.removeAttribute('src');
          audioCancel.parentElement.classList.remove('dropped');
          audioCancel.parentElement.style.backgroundImage = '';
-         activeAudio.pop(audioCancel);
 
+         // Removes the faded out class and makes it accessable again
          if (activeAudio.includes(audioCancel)) {
          const song = document.getElementById(songsFaded[x]);
          song.classList.remove('notActive');
          song.setAttribute('draggable', true);
          songsFaded[x] = null;
          }
+         activeAudio.pop(audioCancel);
          });
       });
 
@@ -174,6 +182,7 @@ const exit = document.querySelectorAll('.exit');
       elem.addEventListener('click', function(event) {
          let audioCancel = document.getElementById(`audio${x}`);
 
+         // Stops the audio from playing and removes classes
          activeAudio.pop(audioCancel);
          if (audioCancel.duration >= 0) {
          audioCancel.parentElement.classList.remove('dropped');
@@ -183,6 +192,7 @@ const exit = document.querySelectorAll('.exit');
          cancelAudio.splice(x, 1, audioCancel);
          console.log(cancelAudio)
 
+         // Removes the faded out class and makes it accessable again
          const song = document.getElementById(songsFaded[x]);
          console.log(songsFaded[x])
          song.classList.remove('notActive');
@@ -191,8 +201,6 @@ const exit = document.querySelectorAll('.exit');
          }
          });
       });
-
-resync(); // Starts the resync Timer
 
 
 // INFO BUTTON
@@ -208,3 +216,7 @@ resync(); // Starts the resync Timer
       info.classList.add('hidden');
       });
    });
+
+
+
+resync(); // Starts the resync Timer
