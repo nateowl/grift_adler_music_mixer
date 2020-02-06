@@ -48,10 +48,7 @@ songs.forEach((elem, x) => {
 function clearClass() {
    const audioPlayer = document.querySelectorAll('.drop__box');
    audioPlayer.forEach((elem, x) => {
-   elem.classList.remove('exitOut');
-   elem.classList.remove('droppable');
-   elem.classList.remove('wait');
-
+   elem.classList.remove('exitOut', 'droppable', 'wait');
    if (cancelAudio[x]) {
       cancelAudio[x] = null;
       elem.style.removeProperty('backgroundImage');
@@ -185,8 +182,7 @@ const exit = document.querySelectorAll('.exit');
          // Stops the audio from playing and removes classes
          activeAudio.pop(audioCancel);
          if (audioCancel.duration >= 0) {
-         audioCancel.parentElement.classList.remove('dropped');
-         audioCancel.parentElement.classList.remove('wait');
+         audioCancel.parentElement.classList.remove('dropped', 'wait');
          audioCancel.parentElement.classList.add('exitOut');
 
          cancelAudio.splice(x, 1, audioCancel);
