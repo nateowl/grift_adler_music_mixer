@@ -9,16 +9,8 @@
    <link href="css/main.css" rel="stylesheet"  type="text/css" media="screen">
 </head>
 <body>
-
-<section id="home"><!--Home Section Start-->
-   <div class="home__nav">
-
-   </div>
-   <div class="home__slash">
-
-   </div>
-   <div class="home__start"></div>
-</section><!--Home Section End-->
+<div class="background">
+</div>
 
 <section id="game">
 
@@ -32,97 +24,93 @@
          </a>
       </section><!--Nav Section End-->
       <div class="music__tracks">
-         <img class="songs"></img>
-         <img class="songs"></img>
-         <img class="songs"></img>
-         <img class="songs"></img>
-         <img class="songs"></img>
-         <img class="songs"></img>
-         <img class="songs"></img>
-         <img class="songs"></img>
+         <img id="song0" src="images/song0.svg" alt="song" draggable="true"></img>
+         <img id="song1" src="images/song1.svg" alt="song" draggable="true"></img>
+         <img id="song2" src="images/song2.svg" alt="song" draggable="true"></img>
+         <img id="song3" src="images/song3.svg" alt="song" draggable="true"></img>
+         <img id="song4" src="images/song4.svg" alt="song" draggable="true"></img>
+         <img id="song5" src="images/song5.svg" alt="song" draggable="true"></img>
+         <img id="song6" src="images/song6.svg" alt="song" draggable="true"></img>
+         <img id="song7" src="images/song7.svg" alt="song" draggable="true"></img>
 
       </div>
    </div>
    <div class="game__center">
-      <div class="music__image"><p>Image</p>
+      <div class="music__image">
+         <img src="images/boom_box.svg" alt="BOOM BOX">
         </div>
       <div class="music__control">
          <div class="music__drop"><!--Music Drop Start 1-->
-            <div class="drop__box">
+            <div class="drop__box active">
                <audio id="audio0">
-              <source src="sounds/song0.wav" type="audio/wav">
+              <source src="" type="audio/wav">
               </audio>
             </div>
             <div id="drop__controls" class="drop__controls">
                <label class="volume__label">Volume</label>
-               <input type="range" min="1" max="100" value="100" class="slider">
+               <input type="range" min="1" max="100" value="50" class="slider">
                <div class="sound__controls">
                   <img src="images/mute.svg" alt="mute" class="mute__buttons mute">
-                  <img src="images/forceexit.svg" alt="forceExit" class="mute__buttons forceExit">
                   <img src="images/exit.svg" alt="exit" class="mute__buttons exit">
                </div>
             </div>
          </div><!--Music Drop End -->
          <div class="music__drop"><!--Music Drop Start 2-->
-            <div class="drop__box">
+            <div class="drop__box active">
                <audio id="audio1">
-              <source src="sounds/song0.wav" type="audio/wav">
+              <source src="" type="audio/wav">
               </audio>
             </div>
             <div id="drop__controls" class="drop__controls">
                <label class="volume__label">Volume</label>
-               <input type="range" min="1" max="100" value="100" class="slider">
+               <input type="range" min="1" max="100" value="50" class="slider">
                <div class="sound__controls">
                   <img src="images/mute.svg" alt="mute" class="mute__buttons mute">
-                  <img src="images/forceexit.svg" alt="forceExit" class="mute__buttons forceExit">
+                  <img src="images/exit.svg" alt="exit" class="mute__buttons exit">
+               </div>
+            </div>
+         </div><!--Music Drop end -->
+         <div class="music__drop"><!--Music Drop Start 2-->
+            <div class="drop__box active">
+               <audio id="audio2">
+              <source src="" type="audio/wav">
+              </audio>
+            </div>
+            <div id="drop__controls" class="drop__controls">
+               <label class="volume__label">Volume</label>
+               <input type="range" min="1" max="100" value="50" class="slider">
+               <div class="sound__controls">
+                  <img src="images/mute.svg" alt="mute" class="mute__buttons mute">
+                  <img src="images/exit.svg" alt="exit" class="mute__buttons exit">
+               </div>
+            </div>
+         </div><!--Music Drop end -->
+         <div class="music__drop"><!--Music Drop Start 2-->
+            <div class="drop__box active">
+               <audio id="audio3">
+              <source src="" type="audio/wav">
+              </audio>
+            </div>
+            <div id="drop__controls" class="drop__controls">
+               <label class="volume__label">Volume</label>
+               <input type="range" min="1" max="100" value="50" class="slider">
+               <div class="sound__controls">
+                  <img src="images/mute.svg" alt="mute" class="mute__buttons mute">
                   <img src="images/exit.svg" alt="exit" class="mute__buttons exit">
                </div>
             </div>
          </div><!--Music Drop end -->
          <div class="music__drop"><!--Music Drop Start 3-->
-            <div class="drop__box">
-               <audio id="audio2">
-              <source src="sounds/song0.wav" type="audio/wav">
-              </audio>
-            </div>
-            <div id="drop__controls" class="drop__controls">
-               <label class="volume__label">Volume</label>
-               <input type="range" min="1" max="100" value="100" class="slider">
-               <div class="sound__controls">
-                  <img src="images/mute.svg" alt="mute" class="mute__buttons mute">
-                  <img src="images/forceexit.svg" alt="forceExit" class="mute__buttons forceExit">
-                  <img src="images/exit.svg" alt="exit" class="mute__buttons exit">
-               </div>
-            </div>
-         </div><!--Music Drop end -->
-         <div class="music__drop"><!--Music Drop Start 4-->
-            <div class="drop__box">
-               <audio id="audio3">
-              <source src="sounds/song0.wav" type="audio/wav">
-              </audio>
-            </div>
-            <div id="drop__controls" class="drop__controls">
-               <label class="volume__label">Volume</label>
-               <input type="range" min="1" max="100" value="100" class="slider">
-               <div class="sound__controls">
-                  <img src="images/mute.svg" alt="mute" class="mute__buttons mute">
-                  <img src="images/forceexit.svg" alt="forceExit" class="mute__buttons forceExit">
-                  <img src="images/exit.svg" alt="exit" class="mute__buttons exit">
-               </div>
-            </div>
-         </div><!--Music Drop end -->
-         <div class="music__drop"><!--Music Drop Start 5-->
-            <div class="drop__box">
+            <div class="drop__box active">
                <audio id="audio4">
-              <source src="sounds/song0.wav" type="audio/wav">
+              <source src="" type="audio/wav">
               </audio>
             </div>
             <div id="drop__controls" class="drop__controls">
-               <label for="volume-1" class="volume__label">Volume</label>
-               <input type="range" min="1" max="100" value="100" class="slider">
+               <label class="volume__label">Volume</label>
+               <input type="range" min="1" max="100" value="50" class="slider">
                <div class="sound__controls">
                   <img src="images/mute.svg" alt="mute" class="mute__buttons mute">
-                  <img src="images/forceexit.svg" alt="forceExit" class="mute__buttons forceExit">
                   <img src="images/exit.svg" alt="exit" class="mute__buttons exit">
                </div>
             </div>
@@ -136,14 +124,15 @@
          </a>
       </section><!--Nav Section End-->
       <div class="music__tracks">
-         <img class="songs"></img>
-         <img class="songs"></img>
-         <img class="songs"></img>
-         <img class="songs"></img>
-         <img class="songs"></img>
-         <img class="songs"></img>
-         <img class="songs"></img>
-         <img class="songs"></img>
+         <img id="song8" src="images/song8.svg" alt="song" draggable="true"></img>
+         <img id="song9" src="images/song9.svg" alt="song" draggable="true"></img>
+         <img id="song10" src="images/song10.svg" alt="song" draggable="true"></img>
+         <img id="song11" src="images/song11.svg" alt="song" draggable="true"></img>
+         <img id="song12" src="images/song12.svg" alt="song" draggable="true"></img>
+         <img id="song13" src="images/song13.svg" alt="song" draggable="true"></img>
+         <img id="song14" src="images/song14.svg" alt="song" draggable="true"></img>
+         <img id="song15" src="images/song15.svg" alt="song" draggable="true"></img>
+
       </div>
    </div>
 </section>

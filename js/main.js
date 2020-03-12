@@ -1,8 +1,20 @@
-// Setting default values for gameplay
-let activeAudio = [];
-let cancelAudio = [null, null, null, null, null];
-let songsFaded = [null, null, null, null, null];
-let gamePlay = true;
+// Music Mixer Application
+
+// Application coded by Nate Grift
+// Graphics done by Natasha Adler
+
+// Global Variables
+const songs = document.querySelectorAll(".music__tracks img"),
+   dropBoxs = document.querySelectorAll(".drop__box"),
+   musicSection = document.querySelectorAll(".music__tracks"),
+   muteBtns = document.querySelectorAll(".mute"),
+   exitBtns = document.querySelectorAll(".exit"),
+   jukebox = document.querySelector(".music__image");
+
+let config = {
+   waitTime: 4366, // Wait time before relooping in ms
+   typeOfAudio: 'wav' // Type of audio files
+}
 
 
 // Fixes Safari Audio Loading Delay
@@ -10,209 +22,163 @@ const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioCtx = new AudioContext();
 
 
-// Resets the time of the audio ** AUTOMATICALLY LOOPING **
+// LOOPING function
 function resync() {
-   setTimeout(function(){
-      for (x of activeAudio) {
-         x.parentElement.classList.remove('wait');
-      }
-   }, 3900);
-   setTimeout(function(){
-      for (x of activeAudio) {
-         x.currentTime = 0;
-         if (x.duration < 0 || x.paused) {
-            x.play();
+   setTimeout(function() {
+      dropBoxs.forEach((item, i) => {
+         // Sets Audio Player
+         audioPlayer = item.firstElementChild;
+
+         // Removes Faded out class
+         item.classList.remove("wait");
+
+         // Makes it not draggable
+         item.lastElementChild.draggable = false;
+
+         // Play or reset time
+         if (audioPlayer.src) {
+            audioPlayer.currentTime = 0;
+            if (audioPlayer.duration < 0 || audioPlayer.paused) {
+               audioPlayer.play()
+            }
          }
 
-      }
+         // Removes img and resets audio
+         if (!audioPlayer.src && item.children.length != 1) {
+            item.lastElementChild.draggable = true;
+            if (musicSection[0].children.length < musicSection[1].children.length) {
+            musicSection[0].appendChild(item.lastElementChild);
+            } else {
+               musicSection[1].appendChild(item.lastElementChild);
+            }
+            item.classList.add("active")
+            sliders[i].value = 50;
+         }
+      });
       resync();
-   }, 4366); // Exact Number for the exact moment of next beat
-   clearClass();
-
+   }, config.waitTime); // Exact Number for the exact moment of next beat ubove in config settings
 }
 
+resync();//Initally run when script runs
 
-//Creates Event listeners for the songs, with dragstart and sets Id & Src's
-const songs = document.querySelectorAll('.songs');
-songs.forEach((elem, x) => {
-   elem.setAttribute('draggable', true);
-   elem.id = `song${x}`;
-   elem.src = `images/song${x}.svg`;
-   elem.addEventListener('dragstart', function(event) {
-         event.dataTransfer.setData("text", elem.id);
-   });
+
+// SONGS
+
+// Making able to be dragged and setting data
+songs.forEach((song, i) => {
+   song.addEventListener('dragstart', function() {
+      event.dataTransfer.setData("text/plain", event.target.id);
+   })
 });
 
 
-// Default Classes Dropbox
-function clearClass() {
-   const audioPlayer = document.querySelectorAll('.drop__box');
-   audioPlayer.forEach((elem, x) => {
-   elem.classList.remove('exitOut', 'droppable', 'wait');
-   if (cancelAudio[x]) {
-      cancelAudio[x] = null;
-      elem.style.removeProperty('backgroundImage');
-      elem.style.backgroundImage = '';
+// JUKEBOX
+jukebox.addEventListener('dragover', function() {
+   event.preventDefault();
+});
+
+jukebox.addEventListener('drop', addNext.bind(event))
+
+// Adds to next available spot if possible.
+function addNext() {
+   let activeLoop = true;
+   dropBoxs.forEach((dropbox, i) => {
+      event.preventDefault();
+      if (dropbox.children.length == 1 && activeLoop) {
+         let data = event.dataTransfer.getData("text/plain");
+         dropbox.appendChild(document.getElementById(data));
+         // AUDIO play from player
+         audioElem = dropbox.firstElementChild
+         audioElem.src = `sounds/${data}.${config.typeOfAudio}`;
+         // Removes background questionmark
+         dropbox.classList.remove("active")
+         dropbox.classList.add("wait")
+         activeLoop = false;
+      }
+   })
+};
+
+// Transfer songs between music sections
+musicSection.forEach((section, i) => {
+   section.addEventListener('dragover', function() {
+      event.preventDefault();
+   })
+   section.addEventListener('drop', function() {
+         event.preventDefault();
+         const data = event.dataTransfer.getData("text/plain");
+         section.appendChild(document.getElementById(data));
+      })
+});
+
+
+// Music Player
+
+// Dragover Handler
+dropBoxs.forEach((item, i) => {
+   item.addEventListener('dragover', function() {
+      event.preventDefault();
+   })
+});
+
+// Drop Handler
+dropBoxs.forEach((item, i) => {
+   item.addEventListener('drop', function() {
+
+      // Moves img element
+      if (this.children.length == 1) {
+         event.preventDefault();
+         const data = event.dataTransfer.getData("text/plain");
+         event.target.appendChild(document.getElementById(data));
+
+
+         //AUDIO play from player
+         audioElem = this.firstElementChild
+         audioElem.src = `sounds/${data}.${config.typeOfAudio}`;
+
+         //Removes background questionmark
+         this.classList.remove("active")
+         this.classList.add("wait")
+      }
+   })
+});
+
+// Removes child
+dropBoxs.forEach((item, i) => {
+   item.addEventListener('click', removeImg.bind(item))
+});
+
+// MUTE Button
+muteBtns.forEach((item, i) => {
+   item.addEventListener('click', function() {
+      audioPlayer = document.querySelector(`#audio${i}`);
+      if (audioPlayer.muted) {
+         audioPlayer.muted = false;
+         this.src = "images/mute.svg";
+      } else {
+         audioPlayer.muted = true;
+         this.src = "images/muted.svg";
+      }
+   })
+});
+
+// EXIT Button
+exitBtns.forEach((item, i) => {
+   item.addEventListener('click', removeImg.bind(dropBoxs[i]))
+});
+
+function removeImg() {
+   if (this.children.length > 1) {
+      this.firstElementChild.removeAttribute('src')
+      this.classList.add("wait")
    }
-});
 }
 
-
-//Creates Event listeners for the Audio Players, with drop, dragleave, dragover
-const audioPlayer = document.querySelectorAll('.drop__box');
-audioPlayer.forEach((elem, x) => {
-
-   // Drop function when user drops desired song on audio player
-   elem.addEventListener('drop', function(event) {
-      if (!cancelAudio[x]) {
-      event.preventDefault();
-      let data = event.dataTransfer.getData("text");
-      let dropId = `audio${x}`;
-      plays(data, dropId);
-
-
-      if (songsFaded[x]) {
-         const songOld = document.getElementById(songsFaded[x]);
-         songOld.classList.remove('notActive');
-         songOld.setAttribute('draggable', true);
-         songsFaded[x] = null;
-      }
-      songsFaded[x] = data;
-      const song = document.getElementById(data);
-      song.classList.add('notActive');
-      song.setAttribute('draggable', false);
-      }
-
-   });
-
-   // Adds droppable class when object not being hovered over
-   elem.addEventListener('dragover', function(event) {
-      event.preventDefault();
-      elem.classList.add('droppable');
-   });
-
-   // Removes droppable class when object not being hovered over
-   elem.addEventListener('dragleave', function(event) {
-      elem.classList.remove('droppable');
-   });
-});
-
-
-/**
- * Plays Song called from when song is dropped
- * @param  {string} songId Song Id to signal what song to play
- * @param  {string} dropId Drop Id of what Audio Player
- */
-function plays(songId, dropId) {
-   let audio;
-   audio = document.getElementById(dropId);
-   audio.src = `sounds/${songId}.wav`;
-   audio.currentTime = 0;
-   if (!activeAudio.includes(audio)) {
-   activeAudio.push(audio);
-}
-   audio.load();
-   audio.parentElement.classList.toggle('dropped');
-   audio.parentElement.classList.add('wait');
-   audio.parentElement.style.backgroundImage = 'url("images/' + songId + '.svg")';
-}
-
-
-
-//Creates Event listeners for the Sliders
-const slider = document.querySelectorAll('.slider');
-slider.forEach((elem, x) => {
-
-   elem.addEventListener('input', function(event) {
-      let audioVolume = document.getElementById(`audio${x}`);
+// SLIDERS for volume
+const sliders = document.querySelectorAll('.slider');
+sliders.forEach((item, i) => {
+   item.addEventListener('input', function() {
+      let audioVolume = document.getElementById(`audio${i}`);
       audioVolume.volume = this.value / 101;
    });
+
 });
-
-
-
-//Mute and Exit Button
-const mute = document.querySelectorAll('.mute');
-const forceExit = document.querySelectorAll('.forceExit');
-const exit = document.querySelectorAll('.exit');
-
-   // Mute Buttons
-   mute.forEach((elem, x) => {
-      elem.addEventListener('click', function(event) {
-         let audioMute = document.getElementById(`audio${x}`);
-         if (audioMute.muted) {
-            audioMute.muted = false;
-            elem.src = "images/mute.svg";
-         } else {
-         audioMute.muted = true;
-         elem.src = "images/muted.svg";
-         }
-      });
-      });
-
-
-   // FORCE Cancel Buttons
-   forceExit.forEach((elem, x) => {
-      elem.addEventListener('click', function(event) {
-         clearClass();
-         // Stops the audio from playing
-         let audioCancel = document.getElementById(`audio${x}`);
-         audioCancel.pause();
-         audioCancel.removeAttribute('src');
-         audioCancel.parentElement.classList.remove('dropped');
-         audioCancel.parentElement.style.backgroundImage = '';
-
-         // Removes the faded out class and makes it accessable again
-         if (activeAudio.includes(audioCancel)) {
-         const song = document.getElementById(songsFaded[x]);
-         song.classList.remove('notActive');
-         song.setAttribute('draggable', true);
-         songsFaded[x] = null;
-         }
-         activeAudio.pop(audioCancel);
-         });
-      });
-
-
-   // Cancel Buttons
-   exit.forEach((elem, x) => {
-      elem.addEventListener('click', function(event) {
-         let audioCancel = document.getElementById(`audio${x}`);
-
-         // Stops the audio from playing and removes classes
-         activeAudio.pop(audioCancel);
-         if (audioCancel.duration >= 0) {
-         audioCancel.parentElement.classList.remove('dropped', 'wait');
-         audioCancel.parentElement.classList.add('exitOut');
-
-         cancelAudio.splice(x, 1, audioCancel);
-         console.log(cancelAudio)
-
-         // Removes the faded out class and makes it accessable again
-         const song = document.getElementById(songsFaded[x]);
-         console.log(songsFaded[x])
-         song.classList.remove('notActive');
-         song.setAttribute('draggable', true);
-         songsFaded[x] = null;
-         }
-         });
-      });
-
-
-// INFO BUTTON
-   const infoBtn = document.getElementById('infoBtn');
-   const info = document.getElementById('info');
-   infoBtn.addEventListener('click', function(event) {
-      info.classList.remove('hidden');
-   });
-
-   const exitBtns = document.querySelectorAll('.exitBtn');
-   exitBtns.forEach((elem, x) => {
-      elem.addEventListener('click', function() {
-      info.classList.add('hidden');
-      });
-   });
-
-
-
-resync(); // Starts the resync Timer

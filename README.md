@@ -24,6 +24,22 @@ We also took inspiration from a dj, with music controls with a launch pad.
 
 [Our DJ Inspiration](https://www.adorama.com/alc/wp-content/uploads/2017/08/shutterstock_415922566-825x465.jpg "DJ image")
 
+### Colors
+
+Colors numbered 1-12 based off of our Yellow, Orange, Pink, and Purple theme.
+
+1.  `#AB1F67`
+2.  `#DE3766`
+3.  `#F15A22`
+4.  `#F9A01B`
+5.  `#932068`
+6.  `#D3147D`
+7.  `#EF4023`
+8.  `#F48520`
+9.  `#781B56`
+10. `#B61D8D`
+11. `#E11E2D`
+12. `#EF6D22`
 
 
 ### Authors
