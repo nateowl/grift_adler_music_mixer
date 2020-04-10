@@ -40,6 +40,10 @@ function resync() {
             audioPlayer.currentTime = 0;
             if (audioPlayer.duration < 0 || audioPlayer.paused) {
                audioPlayer.play()
+               if (!jukebox.classList.contains("music__image--animation")) {
+                  jukebox.classList.add("music__image--animation")
+                  setTimeout(function(){ jukebox.classList.remove("music__image--animation") }, 2000);
+               }
             }
          }
 
